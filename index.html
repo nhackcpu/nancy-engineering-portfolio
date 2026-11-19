@@ -1,0 +1,287 @@
+<!doctype html><!-- #html Tells the browser to use modern HTML standards. -->
+<html lang="en"><!-- #html Sets the document language to English. -->
+<head><!-- #html Starts metadata and style definitions. -->
+  <meta charset="utf-8"><!-- #html Supports standard text characters. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- #html Makes the layout fit mobile screens. -->
+  <meta name="description" content="Engineering projects, volunteering, and studies by Nancy W Shehata."><!-- #html Describes the portfolio for browsers and search results. -->
+  <title>Nancy W Shehata | Engineering Portfolio</title><!-- #html Sets the browser tab title. -->
+  <style>/* #css Starts the page palette and layout rules. */
+    /* #css Change these variables to adjust the colors. */
+    :root { /* #css Starts the shared color and font variables. */
+      --paper: #f5f3ee; --panel: #fffefa; --ink: #1f2d3d; /* #css Sets a light stone page, clean cards, and deep navy text. */
+      --muted: #64717b; --line: #d8d0c4; --blue: #28736f; /* #css Sets quiet secondary text, warm borders, and confident teal accents. */
+      --blue-pale: #e6efeb; --copper: #b76e4d; /* #css Sets soft teal tags and a restrained copper highlight. */
+      font-family: "Segoe UI", Arial, sans-serif; /* #css Sets the default typeface. */
+    } /* #css Ends the shared design variables. */
+    * { box-sizing: border-box; } /* #css Includes padding and borders in element sizes. */
+    body { /* #css Starts the base page layout. */
+      margin: 0; color: var(--ink); background-color: var(--paper); /* #css Removes default spacing and sets page colors. */
+      font-size: 15px; line-height: 1.65; /* #css Sets readable body text. */
+    } /* #css Ends the page background and typography rules. */
+    a { color: var(--blue); } /* #css Colors links blue. */
+    .wrap { width: min(1080px, calc(100% - 36px)); margin: auto; } /* #css Centers content and limits its width. */
+    header { position: sticky; top: 0; z-index: 2; border-bottom: 1px solid var(--line); background: #f5f3eeee; } /* #css Keeps navigation visible at the top. */
+    .nav { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 18px; } /* #css Lays out the brand and navigation links. */
+    .brand { font-size: 12px; font-weight: 750; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; } /* #css Styles the portfolio brand. */
+    nav { display: flex; flex-wrap: wrap; gap: 18px; } /* #css Arranges navigation links in a row. */
+    nav a { color: var(--muted); font-size: 13px; font-weight: 650; text-decoration: none; } /* #css Styles navigation links. */
+    a:hover { color: var(--copper); } /* #css Highlights links in copper when hovered. */
+    main { padding-block: 34px 70px; } /* #css Adds space around the page content. */
+    .page-view[hidden] { display: none !important; } /* #css Hides inactive page views. */
+    .section { margin-top: 42px; } /* #css Separates major sections. */
+    .panel, .detail, .study { border: 1px solid var(--line); border-radius: 7px; background: var(--panel); } /* #css Gives content panels a shared card style. */
+    .hero { display: grid; grid-template-columns: 1.3fr .7fr; align-items: center; gap: 28px; padding: clamp(22px, 5vw, 46px); } /* #css Creates the responsive About layout. */
+    .home-page { min-height: 68vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 28px 12px; text-align: center; } /* #css Centers the title and page buttons on the home view. */
+    .home-page h1 { margin: 0; color: var(--blue); font-size: clamp(34px, 6vw, 54px); line-height: 1.15; } /* #css Styles the name on the home view. */
+    .home-role { margin: 0; color: var(--muted); font-size: 16px; } /* #css Styles the title below the name. */
+    .home-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 8px; } /* #css Arranges the four home navigation buttons. */
+    .hero h1 { margin: 0 0 12px; color: var(--blue); font-size: clamp(34px, 6vw, 56px); line-height: 1.12; } /* #css Styles the main About heading. */
+    .hero p { color: var(--muted); } /* #css Softens the About paragraph color. */
+    .eyebrow { margin-bottom: 8px; color: var(--copper); font-size: 11px; font-weight: 750; letter-spacing: .15em; text-transform: uppercase; } /* #css Styles small section labels in copper. */
+    .buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; } /* #css Spaces the About navigation buttons. */
+    .button { display: inline-block; padding: 9px 14px; border: 1px solid var(--blue); border-radius: 4px; background: var(--blue); color: var(--paper); font-size: 13px; font-weight: 700; text-decoration: none; } /* #css Styles the primary navigation button. */
+    .button.alt { background: transparent; color: var(--blue); } /* #css Styles the outlined secondary button. */
+    h2 { margin: 0 0 8px; color: var(--blue); font-size: clamp(25px, 4vw, 34px); line-height: 1.2; } /* #css Styles section headings. */
+    h3 { margin: 0 0 8px; color: var(--blue); font-size: 19px; line-height: 1.3; } /* #css Styles project and study headings. */
+    p { margin: 0 0 12px; } /* #css Adds consistent space below paragraphs. */
+    .muted { color: var(--muted); } /* #css Styles secondary text. */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; } /* #css Arranges project cards in columns. */
+    .project-entry { overflow: hidden; border: 1px solid var(--line); border-radius: 7px; background: var(--panel); } /* #css Styles each expandable project card. */
+    .project-entry[open] { grid-column: 1 / -1; } /* #css Expands an open project across the card grid. */
+    .project-entry summary { cursor: pointer; list-style: none; } /* #css Makes the project summary clickable. */
+    .project-entry summary::-webkit-details-marker { display: none; } /* #css Hides the default WebKit disclosure marker. */
+    .project-entry summary:hover h3 { text-decoration: underline; } /* #css Signals that project titles are interactive. */
+    .project-entry[open] summary { border-bottom: 1px solid var(--line); } /* #css Separates the card from open details. */
+    .project-entry[open] .expand-hint { display: none; } /* #css Hides the open hint after expansion. */
+    .project-details { padding: clamp(18px, 4vw, 28px); } /* #css Adds space around expanded project details. */
+    .expand-hint { display: block; margin-top: 10px; color: var(--blue); font-size: 12px; font-weight: 700; } /* #css Labels the expandable project action. */
+    .card-body { padding: 15px; } /* #css Adds spacing inside a project card. */
+    .cover, .cover-title { display: grid; width: 100%; height: 170px; place-items: center; background-color: var(--paper); } /* #css Sizes project covers and typographic project art. */
+    .cover { object-fit: cover; } /* #css Crops a real project photo to fill its cover area. */
+    .cover-sidepods { object-position: center 42%; } /* #css Favors the sidepod prototypes in the portrait photo crop. */
+    .cover-cad { object-fit: contain; padding: 8px; background-color: #fff; } /* #css Shows the full suspension CAD assembly without cropping its geometry. */
+    .cover-poster { object-fit: contain; background-color: #fff; } /* #css Fits the complete landscape poster into the project cover. */
+    .about-photo { width: 100%; aspect-ratio: 16 / 9; border-radius: 7px; object-fit: cover; object-position: center; } /* #css Crops the team photo to a wide About-page image. */
+    .project-detail-photo { display: block; width: 100%; max-height: 320px; height: auto; border-radius: 4px; object-fit: contain; object-position: center; } /* #css Shows the full cropped portrait photo without cutting off suspension components. */
+    .cover-title { padding: 16px; background: var(--blue-pale); color: var(--blue); font-size: 14px; font-weight: 750; letter-spacing: .12em; text-align: center; text-transform: uppercase; } /* #css Gives the rotary pendulum card a finished typographic cover. */
+    .meta { color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; } /* #css Styles project category and year. */
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; } /* #css Lays out project tags. */
+    .tag { padding: 2px 7px; border: 1px solid var(--line); border-radius: 20px; background: var(--blue-pale); color: var(--blue); font-size: 10px; } /* #css Styles an individual project tag. */
+    .detail, .study { margin-top: 18px; padding: clamp(18px, 4vw, 28px); } /* #css Spaces volunteering and study cards. */
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; } /* #css Arranges expanded project details in two columns. */
+    footer { padding-block: 20px 30px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; } /* #css Styles the portfolio footer. */
+    @media (max-width: 700px) { .hero { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr 1fr; } } /* #css Stacks the About layout and reduces project columns on tablets. */
+    @media (max-width: 500px) { .nav { align-items: flex-start; flex-direction: column; justify-content: center; padding-block: 10px; } nav { gap: 12px; } .grid, .detail-grid { grid-template-columns: 1fr; } } /* #css Stacks navigation and cards on small screens. */
+  </style><!-- #html Ends the page styles. -->
+</head><!-- #html Ends the document metadata. -->
+<body><!-- #html Starts the visible portfolio page. -->
+  <!-- #html Edit the text in this file. There are no website add, edit, or upload controls. -->
+  <header><!-- #html Holds the top navigation. -->
+    <div class="wrap nav"><!-- #html Centers the brand and navigation links. -->
+      <a class="brand" href="#home">Engineering / Portfolio</a><!-- #html Returns visitors to the home page. -->
+      <nav aria-label="Main navigation"><!-- #html Groups the portfolio page links. -->
+        <a href="#home">Home</a><a href="#about">About</a><!-- #html Links to the home and About page views. -->
+        <a href="#projects">Projects</a><!-- #html Links to the Projects page view. -->
+        <a href="#volunteering">Volunteering</a><a href="#studies">Studies</a><!-- #html Links to Volunteering and Studies page views. -->
+      </nav><!-- #html Ends the navigation list. -->
+    </div><!-- #html Ends the centered navigation container. -->
+  </header><!-- #html Ends the site header. -->
+
+  <main class="wrap"><!-- #html Holds the five switchable page views. -->
+    <!-- #html HOME: The first page visitors see, with your title, photo, and navigation buttons. -->
+    <section id="home" class="page-view home-page"><!-- #html Starts the centered home page. -->
+      <h1>Nancy W Shehata</h1><!-- #html Shows your name above the portrait. -->
+      <p class="home-role">Interdisciplinary Engineer and STEM Advocate</p><!-- #html Shows your title below your name. -->
+      <p class="home-role">Mission 44 Scholar | Cohort 3, Royal Academy of Engineering</p><!-- #html Highlights your Mission 44 scholarship, cohort, and academy on the home page. -->
+      <div class="home-buttons"><a class="button" href="#about">About me</a><a class="button alt" href="#projects">Projects</a><a class="button alt" href="#volunteering">Volunteering</a><a class="button alt" href="#studies">Studies</a></div><!-- #html Provides a separate page button for each portfolio section. -->
+    </section><!-- #html Ends the home page. -->
+
+    <!-- #html ABOUT: Edit the name, headline, paragraph, or portrait here. -->
+    <section id="about" class="page-view hero panel"><!-- #html Starts the About page view. -->
+      <div><!-- #html Groups About text and navigation buttons. -->
+        <p class="eyebrow">About me</p><!-- #html Labels the About section. -->
+        <h1>Engineering, with curiosity.<br>Nancy W Shehata</h1><!-- #html Shows the headline and portfolio owner's name. -->
+        <p>Interdisciplinary engineer and STEM advocate. I am a mechanical engineering student who enjoys a variety of engineering disciplines and is passionate about learning. I am versatile and love working on projects that push me out of my comfort zone.</p><!-- #html Contains the editable About description. -->
+        <p>I am a Cohort 3 Mission 44 Scholar with the Royal Academy of Engineering.</p><!-- #html Includes your scholar recognition, cohort, and academy in the About section. -->
+        <div class="buttons"><a class="button" href="#projects">Explore projects</a><a class="button alt" href="#volunteering">Volunteering</a></div><!-- #html Provides buttons to the Projects and Volunteering pages. -->
+      </div><!-- #html Ends the About text group. -->
+      <img class="about-photo" src="Assets/Images/formula-student-team.jpg" alt="Formula Student team posing with their race car"><!-- #html Shows the Formula Student team photo on the About page. -->
+    </section><!-- #html Ends the About page view. -->
+
+    <!-- #html PROJECTS: Copy one complete PROJECT ENTRY block to add another expandable project. -->
+    <section id="projects" class="page-view section"><!-- #html Starts the Projects page view. -->
+      <p class="eyebrow">Selected work</p><!-- #html Labels the projects section. -->
+      <h2>Engineering projects</h2><!-- #html Shows the Projects page heading. -->
+      <p class="muted">Select a project card to expand its details.</p><!-- #html Explains the project-card interaction. -->
+      <div class="grid"><!-- #html Arranges expandable project cards in a grid. -->
+        <!-- #html PROJECT ENTRY 1 START: copy through PROJECT ENTRY 1 END to add a project. -->
+        <details class="project-entry"><!-- #html Makes this project expandable without editing controls. -->
+          <summary><!-- #html Makes the cover and summary clickable. -->
+            <img class="cover cover-cad" src="Assets/Images/suspension-upright-wishbone-cad.png" alt="CAD model of the suspension upright and wishbones"><!-- #html Shows the upright and wishbone CAD model as the project cover. -->
+            <div class="card-body"><span class="meta">Mechanical design and vehicle dynamics | 2026</span><h3>Integrated Design and Validation of a Rear Suspension System for Formula Student Vehicles</h3><p>Compared 0%, 15%, and 30% anti-squat geometries using vehicle-dynamics simulation and structural analysis.</p><div class="tags"><span class="tag">CAD</span><span class="tag">FEA</span><span class="tag">Topology optimization</span><span class="tag">R&amp;D</span><span class="tag">DFMA</span><span class="tag">MATLAB</span></div><span class="expand-hint">Open project details</span></div><!-- #html Displays the dissertation title, summary, tags, and expansion hint. -->
+          </summary><!-- #html Ends the clickable project summary. -->
+          <div class="project-details"><!-- #html Holds details revealed when the card expands. -->
+            <p><strong>Role:</strong> Suspension and Vehicle Dynamics Engineer</p><!-- #html States the role on this project. -->
+            <div class="detail-grid"><!-- #html Arranges project information in two columns. -->
+              <section><h3>My contribution</h3><p>Developed the product design specification and designed rear-suspension geometries for 0%, 15%, and 30% anti-squat. Set up IPG Kinematics and CarMaker simulations, and wrote a MATLAB 6×6 load-distribution model to calculate forces in the six suspension links.</p><p>Designed the T45 steel wishbones and 7075-T6 aluminium upright, validated them with ANSYS FEA, and topology-optimised the upright, reducing its mass by about 60% while maintaining a factor of safety of at least 2.</p></section><!-- #html Summarizes the design, simulation, loading, FEA, and optimisation work from the final dissertation. -->
+              <section><h3>Results and reflection</h3><p>The dissertation evaluated 0%, 15%, and 30% anti-squat using kinematic modelling, vehicle-dynamics simulations, and FEA. The 15% setup gave the most controlled overall response. Structural results showed a maximum deformation of 0.5 mm and a minimum factor of safety of 2; topology optimisation reduced upright mass by about 60%.</p></section><!-- #html Summarizes the final dissertation findings and validated structural results. -->
+              <section><h3>Project media and documents</h3><img class="project-detail-photo" src="Assets/Images/rear-suspension-installed.jpg" alt="Rear suspension assembly installed on the Formula Student car"><p><a href="Assets/Reports/rear-suspension-final-report-redacted.pdf" target="_blank" rel="noopener">Read the final dissertation report (PDF)</a></p><p><a href="Assets/Reports/suspension-interim-report-redacted.pdf" target="_blank" rel="noopener">Read the interim report (PDF)</a></p><p><a href="Assets/Reports/rear-suspension-showcase-poster.pdf" target="_blank" rel="noopener">View the suspension showcase poster (PDF)</a></p></section><!-- #html Shows the installed suspension and links the redacted reports and showcase poster. -->
+              <section><h3>Awards and recognition</h3><ul><li>Top Project, Industry Panel Award</li><li>Most Innovative Award, School of Engineering</li><li>Best Undergraduate Project Award</li></ul></section><!-- #html Lists the three awards received for the suspension dissertation project. -->
+            </div><!-- #html Ends the project details grid. -->
+          </div><!-- #html Ends the expanded project content. -->
+        </details><!-- #html Ends project entry 1. -->
+        <!-- #html PROJECT ENTRY 1 END -->
+
+        <!-- #html PROJECT ENTRY 2 START -->
+        <details class="project-entry"><!-- #html Makes project 2 expandable. -->
+          <summary><!-- #html Makes the project card clickable. -->
+            <div class="cover-title">Rotary Inverted Pendulum</div><!-- #html Provides a typographic cover for the control-systems project. -->
+            <div class="card-body"><span class="meta">Mechanical design and control systems | In progress</span><h3>Design and Manufacturing of a Rotary Inverted Pendulum Control System</h3><p>Developing a compact rotary inverted pendulum control system.</p><div class="tags"><span class="tag">Prototyping</span><span class="tag">Design</span><span class="tag">Control systems</span></div><span class="expand-hint">Open project details</span></div><!-- #html Displays project 2's summary, status, and tags. -->
+          </summary><!-- #html Ends the project summary. -->
+          <div class="project-details"><!-- #html Holds project 2's expanded details. -->
+            <p><strong>Role:</strong> Project developer</p><!-- #html States the role on this project. -->
+            <div class="detail-grid"><!-- #html Arranges project information in two columns. -->
+              <section><h3>My contribution</h3><p>Currently developing a compact rotary inverted pendulum control system, with a focus on mechanical design and manufacture.</p></section><!-- #html Summarizes the work currently underway. -->
+            </div><!-- #html Ends the project details grid. -->
+          </div><!-- #html Ends the expanded project content. -->
+        </details><!-- #html Ends project entry 2. -->
+        <!-- #html PROJECT ENTRY 2 END -->
+
+        <!-- #html PROJECT ENTRY 3 START: copy through PROJECT ENTRY 3 END to add a project. -->
+        <details class="project-entry"><!-- #html Makes the portable gantry project expandable. -->
+          <summary><!-- #html Makes the project cover and summary clickable. -->
+            <img class="cover cover-cad" src="Assets/Images/portable-girder-cad.jpeg" alt="CAD model of the portable gantry assembly with its girder and hoist"><!-- #html Shows the portable gantry CAD assembly as the project cover. -->
+            <div class="card-body"><span class="meta">Mechanical and structural design | 2026</span><h3>Design, Simulation and Validation of a Portable Gantry Crane</h3><p>Small-scale portable lifting structure designed around a 1 kg load, with analytical design, CAD, and finite element analysis.</p><div class="tags"><span class="tag">CAD</span><span class="tag">FEA</span><span class="tag">Buckling</span><span class="tag">Structural design</span></div><span class="expand-hint">Open project details</span></div><!-- #html Displays the portable gantry summary and tags. -->
+          </summary><!-- #html Ends the clickable project summary. -->
+          <div class="project-details"><!-- #html Holds details revealed when the gantry card expands. -->
+            <p><strong>Role:</strong> Individual mechanical design project</p><!-- #html States the role on this individual design project. -->
+            <div class="detail-grid"><!-- #html Arranges the report details in two columns. -->
+              <section><h3>My contribution</h3><p>Developed the concept and design requirements for a portable gantry crane targeting a 1 kg load, at least 0.7 m of hoist travel, and a trolley speed of about 0.30 m/s. Compared concepts using decision matrices, completed standards-informed component calculations, selected and costed components, modelled the assembly in SolidWorks, and assessed load-critical components with static, buckling, and transient FEA.</p></section><!-- #html Summarizes the design, calculations, CAD, component selection, and analysis documented in the report. -->
+              <section><h3>Results and reflection</h3><p>Finite element analysis predicted a maximum beam deflection of up to 0.9 mm. The trolley speed analysis estimated 0.314 m/s, exceeding the 0.30 m/s design target.</p></section><!-- #html Summarizes the gantry analysis results against the design target. -->
+              <section><h3>Project media and documents</h3><p><a href="Assets/Reports/portable-gantry-report-redacted.pdf" target="_blank" rel="noopener">Read the portable gantry report (PDF)</a></p></section><!-- #html Links the redacted portable gantry report. -->
+            </div><!-- #html Ends the report details grid. -->
+          </div><!-- #html Ends the expanded gantry project content. -->
+        </details><!-- #html Ends project entry 3. -->
+        <!-- #html PROJECT ENTRY 3 END -->
+
+        <!-- #html PROJECT ENTRY 4 START -->
+        <details class="project-entry"><!-- #html Makes the Le Mans team project expandable. -->
+          <summary><!-- #html Makes the project cover and summary clickable. -->
+            <img class="cover cover-poster" src="Assets/Images/lemans-jlr-poster-cover.jpg" alt="JLR Le Mans Hypercar project poster"><!-- #html Shows the Le Mans project poster as the project card cover. -->
+            <div class="card-body"><span class="meta">JLR collaboration | Team vehicle concept | 2026</span><h3>Le Mans Hypercar Prototype: Concept, Materials and Testing</h3><p>Team concept work in collaboration with JLR, covering cockpit sizing, material choices, impact-zone design, and a testing strategy.</p><div class="tags"><span class="tag">JLR collaboration</span><span class="tag">Vehicle design</span><span class="tag">Materials</span><span class="tag">CFRP</span><span class="tag">Design validation</span></div><span class="expand-hint">Open project details</span></div><!-- #html Displays the Le Mans project summary, JLR collaboration, and tags. -->
+          </summary><!-- #html Ends the clickable project summary. -->
+          <div class="project-details"><!-- #html Holds details revealed when the Le Mans card expands. -->
+            <p><strong>Role:</strong> JLR collaboration team member</p><!-- #html States the role on the six-person team project. -->
+            <div class="detail-grid"><!-- #html Arranges the poster details in two columns. -->
+              <section><h3>My contribution</h3><p>Collaborated with a six-person team on a regulation-compliant Le Mans Hypercar cockpit concept and material strategy. The team used customer requirements, a House of Quality, Pugh matrices, and DFMEA to guide cockpit component and impact-zone design decisions.</p></section><!-- #html Describes the user's team contribution using the methods and scope in the supplied poster. -->
+              <section><h3>Results and reflection</h3><p>The team developed a cockpit concept sized for a 95th-percentile male, selected materials for the cockpit components and CFRP/aluminium-honeycomb impact zones, and outlined a validation plan spanning virtual and physical assessment.</p></section><!-- #html Summarizes the cockpit concept, material strategy, and validation planning. -->
+              <section><h3>Project media and documents</h3><p><a href="Assets/Reports/Le-Mans%20Poster%20Mech%204.pdf" target="_blank" rel="noopener">View the Le Mans Hypercar team poster (PDF)</a></p></section><!-- #html Links the supplied team poster. -->
+              <section><h3>Awards and recognition</h3><ul><li>People's Choice Award for Best Project (team award)</li><li>Soft Skills Award (individual award)</li></ul></section><!-- #html Distinguishes the project team's People's Choice award from the individual Soft Skills award. -->
+            </div><!-- #html Ends the poster details grid. -->
+          </div><!-- #html Ends the expanded Le Mans project content. -->
+        </details><!-- #html Ends project entry 4. -->
+        <!-- #html PROJECT ENTRY 4 END -->
+
+        <!-- #html PROJECT ENTRY 5 START -->
+        <details class="project-entry"><!-- #html Makes the Formula Student sidepods project expandable. -->
+          <summary><!-- #html Makes the project cover and summary clickable. -->
+            <img class="cover cover-sidepods" src="Assets/Images/sidepods-prototype.png" alt="Formula Student sidepod prototypes during manufacture"><!-- #html Shows the sidepod prototypes as the project cover. -->
+            <div class="card-body"><span class="meta">Formula Student | Aerodynamics and manufacturing</span><h3>Design and Manufacture of Formula Student Sidepods</h3><p>Personally designed and manufactured a 600 g pair of Formula Student sidepods using a glass-fibre mould and prepreg lay-up.</p><div class="tags"><span class="tag">Formula Student</span><span class="tag">Aerodynamics</span><span class="tag">CAD</span><span class="tag">Manufacturing</span></div><span class="expand-hint">Open project details</span></div><!-- #html Displays the sidepods project summary and tags. -->
+          </summary><!-- #html Ends the clickable project summary. -->
+          <div class="project-details"><!-- #html Holds details revealed when the sidepods card expands. -->
+            <p><strong>Role:</strong> Sidepod designer and manufacturer</p><!-- #html States the user's personal design and manufacturing role. -->
+            <div class="detail-grid"><!-- #html Arranges sidepods project details in two columns. -->
+              <section><h3>My contribution</h3><p>I designed the sidepods and selected the manufacturing method. I 3D-printed the sidepods, then created a glass-fibre mould from them. After curing, I post-processed the mould and completed a prepreg lay-up inside it. I added rubber trim to the finished edges to meet the rules.</p></section><!-- #html Describes the personal design, tooling, composite lay-up, and rule-compliance work. -->
+              <section><h3>Results and reflection</h3><p>The finished pair weighed 600 g in total and became the lightest, most functional, and best-finished sidepods Kingston Racing had produced to date.</p></section><!-- #html Records the finished pair's total mass and team benchmark. -->
+            </div><!-- #html Ends the sidepods details grid. -->
+          </div><!-- #html Ends the expanded sidepods project content. -->
+        </details><!-- #html Ends project entry 5. -->
+        <!-- #html PROJECT ENTRY 5 END -->
+
+      </div><!-- #html Ends the project card grid. -->
+    </section><!-- #html Ends the Projects page view. -->
+
+    <section id="volunteering" class="page-view section"><!-- #html Starts the Volunteering page view. -->
+      <p class="eyebrow">Community</p><h2>Volunteering</h2><!-- #html Shows the Volunteering section label and heading. -->
+      <p class="muted">Mentoring, student support, and STEM outreach.</p><!-- #html Summarizes the range of volunteering and outreach work. -->
+      <!-- #html VOLUNTEER ENTRY 1 START: copy through VOLUNTEER ENTRY 1 END to add another role. -->
+      <article class="detail"><!-- #html Groups the Nanorobots competition mentoring role. -->
+        <h3>Project Mentor, Nanorobots Competition</h3><!-- #html Names the UCL Ingenium mentoring role. -->
+        <p><strong>UCL Ingenium</strong></p><!-- #html Identifies the mentoring organization. -->
+        <p>Mentored participants in programming and working with nanocontrollers for the Nanorobots competition.</p><!-- #html Describes the technical mentoring provided. -->
+      </article><!-- #html Ends volunteering entry 1. -->
+      <!-- #html VOLUNTEER ENTRY 1 END -->
+      <!-- #html VOLUNTEER ENTRY 2 START -->
+      <article class="detail"><!-- #html Groups the Classroom in a Crate mentoring role. -->
+        <h3>Project Mentor, Classroom in a Crate</h3><!-- #html Names the UCL Ingenium mentoring role. -->
+        <p><strong>UCL Ingenium</strong></p><!-- #html Identifies the mentoring organization. -->
+        <p>Mentored participants on Classroom in a Crate, a project focused on structural and product design.</p><!-- #html Describes the design mentoring provided. -->
+      </article><!-- #html Ends volunteering entry 2. -->
+      <!-- #html VOLUNTEER ENTRY 2 END -->
+      <!-- #html VOLUNTEER ENTRY 3 START -->
+      <article class="detail"><!-- #html Groups the Driven by Us volunteering role. -->
+        <h3>Volunteer Member</h3><!-- #html Names the Driven by Us role. -->
+        <p><strong>Driven by Us</strong></p><!-- #html Identifies the volunteer organization. -->
+        <p>Volunteer member contributing to Driven by Us activities.</p><!-- #html Describes the membership without adding unprovided role specifics. -->
+      </article><!-- #html Ends volunteering entry 3. -->
+      <!-- #html VOLUNTEER ENTRY 3 END -->
+      <!-- #html VOLUNTEER ENTRY 4 START -->
+      <article class="detail"><!-- #html Groups the STEM Ambassador role. -->
+        <h3>STEM Ambassador</h3><!-- #html Names the STEM outreach role. -->
+        <p><strong>Since 2025</strong></p><!-- #html Shows the user-provided start year. -->
+        <p>Supporting STEM engagement through ambassador and outreach activities.</p><!-- #html Describes the STEM Ambassador role in general terms. -->
+      </article><!-- #html Ends volunteering entry 4. -->
+      <!-- #html VOLUNTEER ENTRY 4 END -->
+      <!-- #html VOLUNTEER ENTRY 5 START -->
+      <article class="detail"><!-- #html Groups the mechanical engineering outreach event role. -->
+        <h3>Host, Mechanical Engineering Future Skills Day</h3><!-- #html Names the engineering outreach event role. -->
+        <p><strong>Kingston University | With Dr Constance</strong></p><!-- #html Identifies the university and event collaborator. -->
+        <p>Hosted the Mechanical Engineering Future Skills Day with Dr Constance.</p><!-- #html Describes the event hosting activity. -->
+      </article><!-- #html Ends volunteering entry 5. -->
+      <!-- #html VOLUNTEER ENTRY 5 END -->
+      <!-- #html VOLUNTEER ENTRY 6 START -->
+      <article class="detail"><!-- #html Groups the student support role. -->
+        <h3>First-Year Navigate Module Volunteer</h3><!-- #html Names the student support role. -->
+        <p><strong>Kingston University | With Professor Cruz Santiago</strong></p><!-- #html Identifies the university and academic collaborator. -->
+        <p>Support first-year students through the Navigate module, helping them settle into university and find their way through their first year.</p><!-- #html Describes the student support provided. -->
+      </article><!-- #html Ends volunteering entry 6. -->
+      <!-- #html VOLUNTEER ENTRY 6 END -->
+    </section><!-- #html Ends the Volunteering page view. -->
+
+    <section id="studies" class="page-view section"><!-- #html Starts the Studies page view. -->
+      <p class="eyebrow">Education</p><h2>Education and studies</h2><!-- #html Shows the Education label and heading. -->
+      <!-- #html STUDY ENTRY 1 START: copy this article through STUDY ENTRY 1 END to add another study section. -->
+      <article class="study"><!-- #html Groups one study program and its documents. -->
+        <h3>MSc Mechanical Engineering</h3><p><strong>University:</strong> University College London</p><p><strong>Expected:</strong> Distinction</p><!-- #html Lists the degree, institution, and expected result. -->
+        <h4>Compulsory modules</h4><!-- #html Introduces the required MSc modules. -->
+        <p>Advanced Computer Applications, Materials, Group Design, and Project Management</p><!-- #html Lists the MSc compulsory modules as regular text, not bullets. -->
+        <h4>Optional modules</h4><!-- #html Introduces the MSc optional modules. -->
+        <p>Control and Robotics, Thermodynamics and Turbomachinery, and Data-Driven Methods</p><!-- #html Lists the MSc optional modules as regular text, not bullets. -->
+      </article><!-- #html Ends study entry 1. -->
+      <!-- #html STUDY ENTRY 1 END -->
+      <!-- #html Groups the undergraduate education details. -->
+      <article class="study"><!-- #html Groups the undergraduate education details. -->
+        <h3>BEng (Hons) Mechanical Engineering</h3><!-- #html Shows the undergraduate qualification and subject. -->
+        <p><strong>University:</strong> Kingston University London</p><!-- #html Identifies the undergraduate awarding institution. -->
+        <p><strong>Study period:</strong> September 2023 – June 2026 | Full-time, three-year programme</p><!-- #html Shows the dates and mode of study. -->
+        <p>The Higher Education Achievement Report records the qualification as a Bachelor of Engineering with Honours in Mechanical Engineering.</p><!-- #html Summarizes the awarded undergraduate qualification. -->
+      </article><!-- #html Ends the undergraduate education section. -->
+    </section><!-- #html Ends the Studies page view. -->
+
+  </main><!-- #html Ends the main page views. -->
+  <footer class="wrap"><p>Engineering portfolio of Nancy W Shehata.</p></footer><!-- #html Shows the portfolio footer. -->
+  <script>// #js Starts the short page-switching script.
+    // #js Show the read-only page selected by the navigation hash.
+    const pages = Array.from(document.querySelectorAll(".page-view")); // #js Collects the page views that navigation can show.
+
+    function showPage() { // #js Defines the function that switches visible pages.
+      const selectedPage = pages.find((page) => page.id === location.hash.slice(1)) || pages[0]; // #js Chooses the view matching the URL hash or defaults to About.
+      pages.forEach((page) => { page.hidden = page !== selectedPage; }); // #js Hides every page except the selected view.
+      window.scrollTo(0, 0); // #js Starts the selected page at its top.
+    } // #js Ends the page-switching function.
+
+    window.addEventListener("hashchange", showPage); // #js Switches views when a navigation link changes the hash.
+    showPage(); // #js Shows the correct view when the file first opens.
+  </script><!-- #html Ends the page-switching script. -->
+</body><!-- #html Ends the visible page. -->
+</html><!-- #html Ends the HTML document. -->
